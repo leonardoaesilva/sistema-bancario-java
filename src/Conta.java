@@ -15,6 +15,10 @@ public class Conta {
         return saldo;
     }
 
+    public String getTipoDeConta() {
+        return tipoDeConta;
+    }
+
     public boolean sacar(double valor) {
         if (valor <= 0) {
             System.out.println("Operação inválida!");

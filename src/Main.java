@@ -12,10 +12,14 @@ public class Main {
 
     - Todos os atributos tem que ser privados
      */
+
     public static int menuConta() {
-        System.out.println();
-        System.out.println("Selecione o tipo de conta: 1 - Corrente; 2 - Poupança");
-        for (;;) {
+        while (true) {
+            System.out.println();
+            System.out.println("Selecione o tipo de conta: ");
+            System.out.println("1 - Corrente");
+            System.out.println("2 - Poupança");
+            System.out.print("> ");
             Scanner scanner = new Scanner(System.in);
             int tipoConta = scanner.nextInt();
             if (tipoConta == 1)
@@ -23,17 +27,15 @@ public class Main {
             else if (tipoConta == 2)
                 return 1;
             else
-                System.out.println("Valor inválido");
+                System.out.println("ID de conta inválido");
         }
     }
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Conta contaCorrente = new Conta("123", "corrente");
-        Conta contaPoupanca = new Conta("456", "poupança");
-        Cliente cliente = new Cliente("Pedro", "124", "senha", contaCorrente, contaPoupanca);
 
+    private static void menuCaixa(Cliente cliente) {
         boolean operando = true;
+
         while (operando) {
+            Scanner scanner = new Scanner(System.in);
             int indiceConta = menuConta();
             Conta conta = cliente.getConta(indiceConta);
             System.out.println();
@@ -63,7 +65,7 @@ public class Main {
                     conta.depositar(valorDeposito);
                     break;
                 case 3:
-                    System.out.println("Saldo: R$ " + conta.getSaldo());
+                    System.out.println("Saldo disponível em Conta " + conta.getTipoDeConta() +": R$ " + conta.getSaldo());
                     break;
                 case 4:
                     System.out.println("Informe o valor:");
@@ -81,5 +83,14 @@ public class Main {
                     break;
             }
         }
+    }
+
+    public static void main(String[] args) {
+        Conta contaCorrente = new Conta("1", "Corrente");
+        Conta contaPoupanca = new Conta("2", "Poupança");
+
+        Cliente cliente = new Cliente("Pedro", "235", "senha", contaCorrente, contaPoupanca);
+
+        menuCaixa(cliente);
     }
 }
