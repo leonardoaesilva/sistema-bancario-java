@@ -16,19 +16,21 @@ public class Conta {
     }
 
     public boolean sacar(double valor) {
-        if (valor < 0 || valor > saldo) {
-            System.out.println("Valor de saque inválido!");
+        if (valor <= 0) {
+            System.out.println("Operação inválida!");
             return false;
-        } else {
-            saldo -= valor;
+        } else if (valor > saldo) {
+            System.out.println("Saldo indisponível!");
+            return false;
         }
 
+        saldo -= valor;
         return true;
     }
 
     public void depositar(double valor) {
         if (valor <= 0) {
-            System.out.println("Valor de depósito inválido!");
+            System.out.println("Operação inválida!");
         } else {
             saldo += valor;
         }
@@ -38,7 +40,7 @@ public class Conta {
         if (sacar(valor)) {
             contaDestino.depositar(valor);
         } else {
-            System.out.println("Não foi possível efetuar a operação.");
+            System.out.println("Não foi possível efetuar a operação, tente novamente.");
         }
     }
 }
