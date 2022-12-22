@@ -12,19 +12,30 @@ public class Main {
 
     - Todos os atributos tem que ser privados
      */
+    public static int menuConta() {
+        System.out.println();
+        System.out.println("Selecione o tipo de conta: 1 - Corrente; 2 - Poupança");
+        for (;;) {
+            Scanner scanner = new Scanner(System.in);
+            int tipoConta = scanner.nextInt();
+            if (tipoConta == 1)
+                return 0;
+            else if (tipoConta == 2)
+                return 1;
+            else
+                System.out.println("Valor inválido");
+        }
+    }
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Conta contaPoupanca = new Conta("123", "poupança");
-        Conta contaCorrente = new Conta("456", "corrente");
-
-        /*contaPoupanca.depositar(400);
-        System.out.println("Saldo: R$ " + contaPoupanca.getSaldo());
-        contaPoupanca.transferir(120, contaCorrente);
-        System.out.println("Saldo: R$ " + contaCorrente.getSaldo());
-        System.out.println("Saldo: R$ " + contaPoupanca.getSaldo());*/
+        Conta contaCorrente = new Conta("123", "corrente");
+        Conta contaPoupanca = new Conta("456", "poupança");
+        Cliente cliente = new Cliente("Pedro", "124", "senha", contaCorrente, contaPoupanca);
 
         boolean operando = true;
         while (operando) {
+            int indiceConta = menuConta();
+            Conta conta = cliente.getConta(indiceConta);
             System.out.println();
             System.out.println("Escolha uma das opções:");
             System.out.println("1 - Sacar");
@@ -43,28 +54,32 @@ public class Main {
                     System.out.println("Informe o valor:");
                     System.out.print("> ");
                     double valorSaque = scanner.nextDouble();
-                    contaCorrente.sacar(valorSaque);
+                    conta.sacar(valorSaque);
                     break;
                 case 2:
                     System.out.println("Informe o valor:");
                     System.out.print("> ");
                     double valorDeposito = scanner.nextDouble();
-                    contaCorrente.depositar(valorDeposito);
+                    conta.depositar(valorDeposito);
                     break;
                 case 3:
-                    System.out.println("Saldo: R$ " + contaCorrente.getSaldo());
+                    System.out.println("Saldo: R$ " + conta.getSaldo());
                     break;
                 case 4:
                     System.out.println("Informe o valor:");
                     System.out.print("> ");
                     double valorTransferencia = scanner.nextDouble();
-                    contaCorrente.transferir(valorTransferencia, contaPoupanca);
+                    int indiceContaDestino = 0;
+                    if (indiceConta == 0) {
+                        indiceContaDestino = 1;
+                    }
+                    Conta contaDestino = cliente.getConta(indiceContaDestino);
+                    conta.transferir(valorTransferencia, contaDestino);
                     break;
                 default:
                     System.out.println("Opção inválida.");
                     break;
             }
         }
-
     }
 }
