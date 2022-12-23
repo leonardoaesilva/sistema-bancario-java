@@ -2,21 +2,21 @@ public class Conta {
     private String numConta;
     private String agencia;
     private double saldo;
-    private String tipoDeConta;
+    private String tipoConta;
 
-    public Conta(String numConta, String tipoDeConta) {
+    public Conta(String numConta, String tipoConta) {
         this.numConta = numConta;
         this.agencia = "1";
         this.saldo = 0;
-        this.tipoDeConta = tipoDeConta;
+        this.tipoConta = tipoConta;
     }
 
     public double getSaldo() {
         return saldo;
     }
 
-    public String getTipoDeConta() {
-        return tipoDeConta;
+    public String getTipoConta() {
+        return tipoConta;
     }
 
     public boolean sacar(double valor) {

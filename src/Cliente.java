@@ -2,6 +2,7 @@ public class Cliente {
     private String nome;
     private String cpf;
     private String senha;
+    // um vetor de contas para que possam ser atribuídas diferentes contas, como corrente, poupança, etc.
     private Conta[] conta;
 
     public Cliente(String nome, String cpf, String senha, Conta contaTipo1, Conta contaTipo2) {
@@ -13,8 +14,13 @@ public class Cliente {
         this.conta[1] = contaTipo2;
     }
 
+    // método de acesso criado pela IDE
+    /*public Conta[] getConta() {
+        return conta;
+    }*/
+
+    // método de acesso implementado por nós para acessar a conta desejada no vetor pelo índice
     public Conta getConta(int indice) {
         return conta[indice];
     }
-
 }
